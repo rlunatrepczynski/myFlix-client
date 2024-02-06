@@ -21,9 +21,7 @@ export const MainView = () => {
         }
 
         fetch('https://renee-myflix-api-2507fb668e0f.herokuapp.com/movies', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
+            headers: { Authorization: `Bearer ${token}` }
         })
             .then((response) => response.json())
             .then((data) => {
