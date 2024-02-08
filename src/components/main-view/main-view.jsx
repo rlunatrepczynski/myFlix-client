@@ -14,6 +14,8 @@ export const MainView = () => {
     //Use useState to delare a state variable that is called movies and passs the initial state (an empty array) as an argument to the useState()
     const [movies, setMovies] = useState([]);
 
+    const [selectedMovie, setSelectedMovie] = useState(null);
+
     //Fetch data from API and using setMovies, populate the movies state. Do this with the fetched movies array from myFlix API
     useEffect(() => {
         if (!token) {
@@ -58,8 +60,6 @@ export const MainView = () => {
             </>
         );
     }
-
-    const [selectedMovie, setSelectedMovie] = useState(null);
 
     if (selectedMovie) {
         return (
