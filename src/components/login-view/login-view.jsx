@@ -1,6 +1,11 @@
 import React from "react";
 import { useState } from "react";
-const LoginView = ({ onLoggedIn }) => {
+import { Container, Row } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Col from "react-bootstrap/Col";
+
+export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -36,16 +41,41 @@ const LoginView = ({ onLoggedIn }) => {
             });
     }
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Username: <input type="text" value={username} onChange={(e) => { setUsername(e.target.value) }} required minLength={6} />
-            </label>
-            <label >
-                Password: <input type="password" value={password} onChange={(e) => { setPassword(e.target.value) }} required />
-            </label>
-            <button type="submit">Submit</button>
-        </form>
+        <Container className="d-flex justify-content-center align-items-center" style={{ height: "100vh", backgroundColor: "#f0f0f0" }}>
+            <Row>
+                <Col md={6} className="text-center">
+                    <h1>Welcome to myFlix</h1>
+                    <br />
+                    <h2>Login:</h2>
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group controlId="formUsername">
+                            <Form.Label>Username:</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                                minLength="3"
+                                style={{ width: "300px" }}
+                            />
+                        </Form.Group>
+
+                        <Form.Group controlId="formPassword">
+                            <Form.Label>Password:</Form.Label>
+                            <Form.Control
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                style={{ width: "300px" }}
+                            />
+                        </Form.Group>
+                        <Button variant="primary" type="submit" className="mt-3">
+                            Submit
+                        </Button>
+                    </Form>
+                </Col>
+            </Row>
+        </Container>
     );
 };
-
-export { LoginView };
