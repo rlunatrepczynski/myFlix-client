@@ -1,3 +1,23 @@
+.movie-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+div {
+    margin-bottom: 10px;
+
+    span {
+        font-weight: bold;
+        margin-right: 5px;
+    }
+}
+
 .back-button {
     padding: 4px 12px 4px 12px;
     color: whitesmoke;
