@@ -5,6 +5,7 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 //Exports the created MainView component
 export const MainView = () => {
@@ -52,11 +53,12 @@ export const MainView = () => {
     return (
         <div>
             {user && ( //Only render Logout Button if there is a logged-in user)}
-                <button onClick={() => {
+                <Button onClick={() => {
                     setUser(null);
                     setToken(null);
                     localStorage.clear();
-                }}>Logout</button>
+                }}>Logout
+                </Button>
             )}
 
             <Row className="justify-content-md-center">
