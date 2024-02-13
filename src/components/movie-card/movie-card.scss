@@ -1,0 +1,25 @@
+.card-body {
+    border: 1px solid black;
+}
+
+.card-img {
+    width: 100%;
+    height: auto;
+}
+
+.card-title {
+    font-size: 1.2rem;
+}
+
+.card-text {
+    color: blue
+}
+
+.button-link {
+    color: #007bff;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline
+    }
+}
