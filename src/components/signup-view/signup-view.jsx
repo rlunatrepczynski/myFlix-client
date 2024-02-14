@@ -19,24 +19,19 @@ export const SignupView = () => {
       birthday: birthday,
     };
 
-    fetch(`https://renee-myflix-api-2507fb668e0f.herokuapp.com/users`, {
+    fetch("https://renee-myflix-api-2507fb668e0f.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
-    }).then(async(response) => {
-      console.log(data)
+    }).then((response) => {
       if (response.ok) {
         alert("Signup successful");
         window.location.reload();
-      } else if (username.length <5) {
-        alert("Username must have 5 characters or longer.");
       } else {
         alert("Signup failed");
       }
-    }).catch(error => {
-      console.error('Error: ', error);
     });
   };
 
@@ -53,7 +48,7 @@ export const SignupView = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                minLength="5"
+                minLength="3"
                 style={{ width: "300px" }}
               />
             </Form.Group>
