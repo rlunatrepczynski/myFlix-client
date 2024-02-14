@@ -12,6 +12,7 @@ export const ProfileView = ({ user, token, movies, setUser, removeFav, addFav })
 
     let favoriteMoviesList = movies.filter(m => user?.FavoriteMovies?.includes(m.id) || false);
 
+    const navigate = useNavigate();
 
     const handleUpdate = (event) => {
         event.preventDefault();
@@ -49,7 +50,7 @@ export const ProfileView = ({ user, token, movies, setUser, removeFav, addFav })
     };
 
     const handleDelete = () => {
-        const navigate = useNavigate();
+
 
         fetch(`https://renee-myflix-api-2507fb668e0f.herokuapp.com/users/${user.username}`, {
             method: "DELETE",
