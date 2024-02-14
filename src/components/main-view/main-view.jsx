@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { NavigationBar } from "../navigation-bar/navigation-bar";
 
 //Exports the created MainView component
 export const MainView = () => {
@@ -17,8 +18,6 @@ export const MainView = () => {
 
     //Use useState to delare a state variable that is called movies and passs the initial state (an empty array) as an argument to the useState()
     const [movies, setMovies] = useState([]);
-
-    const [selectedMovie, setSelectedMovie] = useState(null);
 
     //Fetch data from API and using setMovies, populate the movies state. Do this with the fetched movies array from myFlix API
     useEffect(() => {
@@ -53,16 +52,11 @@ export const MainView = () => {
 
     return (
         <div>
-            {user && ( //Only render Logout Button if there is a logged-in user
-                <Button onClick={() => {
-                    setUser(null);
-                    setToken(null);
-                    localStorage.clear();
-                }}>Logout
-                </Button>
-            )}
-
             <BrowserRouter>
+                <NavigationBar
+                    user={user}
+                    onLoggedOut={() => setUser(null)}
+                />
                 <Row className="justify-content-md-center">
                     <Routes>
                         <Route
@@ -95,6 +89,7 @@ export const MainView = () => {
 
                             }
                         />
+                        {/*Return MovieView if logged in, otherwise go to LoginView*/}
                         <Route
                             path="/movies/:movieId"
                             element={
