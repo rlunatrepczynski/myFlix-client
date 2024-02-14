@@ -1,8 +1,13 @@
+import{ useParams } from "react-router";
+import { Link } from "react-router-dom";
 import './movie-view.scss';
 
 //Import Prop Types
 import PropTypes from 'prop-types';
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movies }) => {
+    const { movieId } = useParams();
+
+    const movie = movies.find((b) => b.id === bookId);
     return (
         <div>
             <div>
