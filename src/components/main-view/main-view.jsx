@@ -8,6 +8,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { ProfileView } from "../profile-view/profile-view";
 
 //Exports the created MainView component
 export const MainView = () => {
@@ -50,6 +51,63 @@ export const MainView = () => {
             });
     }, [token]);
 
+    // Add Favorite Movies
+    const addFav = (id) => {
+        console.log(`Adding movie with ID ${id} to favorites...`);
+        fetch(`https://renee-myflix-api-2507fb668e0f.herokuapp.com/users/${user.username}/movies/${id}`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    alert("Failed to add Favorite Movie");
+                    throw new Error("Failed to add Favorite Movie");
+                }
+            })
+            .then((updatedUser) => {
+                console.log("User after adding favorite movie:", updatedUser);
+                alert("Added Favorite Movie successfully");
+                localStorage.setItem('user', JSON.stringify(updatedUser));
+                setUser(updatedUser);
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+            });
+    }
+
+    // Delete Favorite Movies
+    const removeFav = (id) => {
+        console.log(`Removing movie with ID ${id} from favorites...`);
+        fetch(`https://renee-myflix-api-2507fb668e0f.herokuapp.com/users/${user.username}/movies/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    alert("Failed to remove favorite movie");
+                    throw new Error("Failed to remove favorite movie");
+                }
+            })
+            .then((updatedUser) => {
+                console.log("User after removing favorite movie:", updatedUser);
+                alert("Removed successfully from favorite movies");
+                localStorage.setItem('user', JSON.stringify(updatedUser));
+                setUser(updatedUser);
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+            });
+    };
+
+
     return (
         <div>
             <BrowserRouter>
@@ -59,6 +117,7 @@ export const MainView = () => {
                 />
                 <Row className="justify-content-md-center">
                     <Routes>
+                        {/*Returns SignupView, otherwise go back to mainpage*/}
                         <Route
                             path="/signup"
                             element={
@@ -73,6 +132,7 @@ export const MainView = () => {
                                 </>
                             }
                         />
+                        {/*Returns LoginView, otherwise go back to mainpage*/}
                         <Route
                             path="/login"
                             element={
@@ -106,6 +166,29 @@ export const MainView = () => {
                                 </>
                             }
                         />
+                        {/*Returns ProfileView, otherwise go to LoginView*/}
+                        <Route
+                            path="/profile"
+                            element={
+                                <>
+                                    {!user ? (
+                                        <Navigate to="/login" replace />
+                                    ) : (
+                                        <Col>
+                                            <ProfileView
+                                                user={user}
+                                                token={token}
+                                                movies={movies}
+                                                setUser={setUser}
+                                                addFav={addFav}
+                                                removeFav={removeFav}
+                                            />
+                                        </Col>
+                                    )}
+                                </>
+                            }
+                        />
+                        {/* Returns MovieCards, otherwise go to LoginView */}
                         <Route
                             path="/"
                             element={
@@ -118,7 +201,12 @@ export const MainView = () => {
                                         <>
                                             {movies.map((movie) => (
                                                 <Col className="mb-4" key={movie.id} md={3}>
-                                                    <MovieCard movie={movie} />
+                                                    <MovieCard
+                                                        movie={movie}
+                                                        addFav={addFav}
+                                                        removeFav={removeFav}
+                                                        isFavorite={user.FavoriteMovies && user.FavoriteMovies.includes(movie.id)}
+                                                    />
                                                 </Col>
                                             ))}
                                         </>
