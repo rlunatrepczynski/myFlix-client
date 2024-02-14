@@ -1,4 +1,4 @@
-import{ useParams } from "react-router";
+import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import './movie-view.scss';
 
@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 export const MovieView = ({ movies }) => {
     const { movieId } = useParams();
 
-    const movie = movies.find((b) => b.id === bookId);
+    const movie = movies.find((b) => b.id === movieId);
     return (
         <div>
             <div>
@@ -33,11 +33,12 @@ export const MovieView = ({ movies }) => {
                 <span>Featured:</span>
                 <span>{movie.Featured.toString()}</span>
             </div>
-            <button onClick={onBackClick}
-                className="back-button"
-                style={{ cursor: "pointer " }} >
-                Back
-            </button>
+            <Link to={`/`}>
+                <button className="back-button"
+                    style={{ cursor: "pointer " }} >
+                    Back
+                </button>
+            </Link>
         </div>
     );
 };
