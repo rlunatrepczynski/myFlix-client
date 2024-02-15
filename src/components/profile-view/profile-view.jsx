@@ -10,7 +10,7 @@ export const ProfileView = ({ user, token, movies, setUser, removeFav, addFav })
     const [email, setEmail] = useState(user?.email || '');
     const [birthday, setBirthday] = useState(user?.birthday || '');
 
-    let favoriteMoviesList = movies.filter(m => user?.FavoriteMovies?.includes(m.id) || false);
+    let favoriteMoviesList = movies.filter(m => user?.favoriteMovies?.includes(m.id) || false);
 
     const navigate = useNavigate();
 
