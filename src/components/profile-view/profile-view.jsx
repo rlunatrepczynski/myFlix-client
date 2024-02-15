@@ -14,7 +14,7 @@ export const ProfileView = ({ user, token, movies, setUser, removeFav, addFav })
 
     const navigate = useNavigate();
 
-    const handleUpdate = (event) => {
+    const handleUpdate = async (event) => {
         event.preventDefault();
 
         const data = {
@@ -24,24 +24,27 @@ export const ProfileView = ({ user, token, movies, setUser, removeFav, addFav })
             birthday: formatDate(birthday)
         };
 
-        fetch(`https://renee-myflix-api-2507fb668e0f.herokuapp.com/users/${user.username}`, {
-            method: "PUT",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then(async (response) => {
-                if (response.ok) {
-                    const data = await response.json();
-                    alert("Update successful");
-                    window.location.reload();
-                } else {
-                    alert("Update failed");
+        try {
+            const response = await fetch(`https://renee-myflix-api-2507fb668e0f.herokuapp.com/users/${user.username}`, {
+                method: "PUT",
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
                 }
             });
 
+            if (response.ok) {
+                const updatedUser = await response.json();
+                alert("Update successful");
+                setUser(updatedUser);
+            } else {
+                alert("Update failed");
+            }
+        } catch (error) {
+            console.error("Error updating user:", error);
+            alert("Update failed. Please try again.");
+        }
     };
 
     const formatDate = (date) => {
@@ -50,8 +53,6 @@ export const ProfileView = ({ user, token, movies, setUser, removeFav, addFav })
     };
 
     const handleDelete = () => {
-
-
         fetch(`https://renee-myflix-api-2507fb668e0f.herokuapp.com/users/${user.username}`, {
             method: "DELETE",
             headers: {
@@ -60,14 +61,14 @@ export const ProfileView = ({ user, token, movies, setUser, removeFav, addFav })
         }).then((response) => {
             if (response.ok) {
                 setUser(null);
-                alert("User deleted")
+                alert("User deleted");
                 localStorage.clear();
                 navigate('/');
             } else {
-                alert("User delete unsuccessful")
+                alert("User delete unsuccessful");
             }
-        })
-    }
+        });
+    };
 
     return (
         <Container className="my-5">
@@ -130,22 +131,23 @@ export const ProfileView = ({ user, token, movies, setUser, removeFav, addFav })
             <Row>
                 <h2>Favorite Movies</h2>
                 <Row className="justify-content-center">
-                    {
-                        favoriteMoviesList?.length !== 0 ?
-                            favoriteMoviesList?.map((movie) => (
-                                <Col key={movie.id}>
-                                    <MovieCard
-                                        movie={movie}
-                                        removeFav={() => removeFav(movie.id)}
-                                        addFav={() => addFav(movie.id)}
-                                        isFavorite={user.FavoriteMovies && user.FavoriteMovies.includes(movie.id)}
-
-                                    />
-                                </Col>
-                            ))
-                            : <Col>
-                                <p>There are no favorites Movies</p>
+                    {favoriteMoviesList?.length !== 0 ? (
+                        favoriteMoviesList?.map((movie) => (
+                            <Col key={movie.id}>
+                                <MovieCard
+                                    movie={movie}
+                                    removeFav={() => removeFav(movie.id)}
+                                    addFav={() => addFav(movie.id)}
+                                    // Pass the correct value for isFavorite
+                                    isFavorite={true}  // Change this to the correct condition based on your logic
+                                    // Pass the correct function for removeFromFavorites
+                                    removeFromFavorites={() => removeFav(movie.id)}
+                                />
                             </Col>
+                        ))
+                    ) : <Col>
+                        <p>There are no favorites Movies</p>
+                    </Col>
                     }
                 </Row>
             </Row>
