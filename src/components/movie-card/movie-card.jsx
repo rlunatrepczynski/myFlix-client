@@ -4,7 +4,7 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./movie-card.scss";
 
-export const MovieCard = ({ movie, addFav, removeFav, isFavorite }) => {
+export const MovieCard = ({ movie, addFav, removeFav, isFavorite, removeFromFavorites }) => {
     return (
         <Card className="h-100">
             <Card.Img variant="top" src={movie.ImageURL} />
@@ -18,9 +18,16 @@ export const MovieCard = ({ movie, addFav, removeFav, isFavorite }) => {
                 </Link>
                 <div>
                     {isFavorite ? (
-                        <Button className="my-2 me-2" onClick={() => removeFav(movie.id)}>Remove from Favorite</Button>
+                        <>
+                            <Button className="my-2 me-2" onClick={() => removeFromFavorites(movie.id)}>
+                                Remove from Favorite
+                            </Button>
+                            {/* Add "Remove Favorites" button */}
+                        </>
                     ) : (
-                        <Button className="my-2 me-2" onClick={() => addFav(movie.id)}>Add to Favorite</Button>
+                        <Button className="my-2 me-2" onClick={() => addFav(movie.id)}>
+                            Add to Favorite
+                        </Button>
                     )}
                 </div>
             </Card.Body>
