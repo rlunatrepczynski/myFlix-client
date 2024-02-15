@@ -79,7 +79,7 @@ export const ProfileView = ({ user, token, movies, setUser, removeFav, addFav })
                             <Card.Img variant="top" src="https://via.placeholder.com/250" className="w-50 rounded" />
                             <Card.Text>Username: {user.username}</Card.Text>
                             <Card.Text>Email: {user.email}</Card.Text>
-                            <Card.Text>Birthday: {user.birthday}</Card.Text>
+                            <Card.Text>Birthday: {formatDate(user.birthday)}</Card.Text>
                         </Card.Body>
                     </Card>
                 </Col>
