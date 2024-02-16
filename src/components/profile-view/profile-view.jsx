@@ -38,6 +38,7 @@ export const ProfileView = ({ user, token, movies, setUser, removeFav, addFav })
                 const updatedUser = await response.json();
                 alert("Update successful");
                 setUser(updatedUser);
+                localStorage.setItem("user", JSON.stringify(updatedUser));
             } else {
                 alert("Update failed");
             }
