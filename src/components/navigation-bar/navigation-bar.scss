@@ -1,0 +1,45 @@
+.navbar {
+    background-color: #fff;
+    /* Change the background color */
+    border-bottom: 1px solid #ddd;
+    /* Add a border at the bottom */
+    z-index: 1;
+}
+
+.logo {
+    margin-right: 10px;
+    /* Add some margin to the logo for spacing */
+}
+
+.nav-link {
+    color: blue !important;
+    /* Change link color */
+    margin: 0 10px;
+    /* Add margin to create space between links */
+}
+
+.nav-link:hover {
+    color: purple !important;
+    /* Change link color on hover */
+}
+
+/* Adjust styling for the collapsed/mobile view */
+.navbar-toggler-icon {
+    background-color: #007bff;
+    /* Change the color of the toggler icon */
+}
+
+.navbar-nav {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.navbar-brand .logo {
+    margin-right: 0;
+}
+
+.navbar-nav .signup-link,
+.navbar-nav .login-link {
+    width: 100%;
+    justify-content: center;
+}
