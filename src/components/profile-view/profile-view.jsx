@@ -155,3 +155,4 @@ export const ProfileView = ({ user, token, movies, setUser, removeFav, addFav })
         </Container>
     );
 };
+
