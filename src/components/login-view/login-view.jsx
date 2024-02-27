@@ -41,9 +41,9 @@ export const LoginView = ({ onLoggedIn }) => {
             });
     }
     return (
-        <Container className="d-flex justify-content-center align-items-center" style={{ height: "100vh", backgroundColor: "#f0f0f0" }}>
+        <Container className="d-flex justify-content-center align-items-center vh-100">
             <Row>
-                <Col md={6} className="text-center">
+                <Col md={6} className="text-center ">
                     <h1>Welcome to myFlix</h1>
                     <br />
                     <h2>Login:</h2>
