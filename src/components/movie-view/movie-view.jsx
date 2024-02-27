@@ -65,4 +65,3 @@ MovieView.propTypes = {
         }),
     })).isRequired,
 };
-
