@@ -36,10 +36,10 @@ export const SignupView = () => {
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center" style={{ height: "100vh", backgroundColor: "#f0f0f0" }}>
+    <Container className="d-flex justify-content-center align-items-center vh-100">
       <Row>
         <Col md={6} className="text-center">
-          <h1>Sign Up:</h1>
+          <h1 className="mb-4">Sign Up for a myFlix Account!</h1>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formUsername">
               <Form.Label>Username:</Form.Label>
@@ -89,6 +89,7 @@ export const SignupView = () => {
         </Col>
       </Row>
     </Container>
+
   );
 };
 
