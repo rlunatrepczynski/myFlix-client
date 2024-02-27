@@ -1,3 +1,4 @@
+import { useState } from 'react';
 //Import Prop Types
 import PropTypes from 'prop-types';
 import { Button, Card } from "react-bootstrap";
@@ -6,7 +7,7 @@ import "./movie-card.scss";
 
 export const MovieCard = ({ movie, addFav, removeFav, isFavorite, removeFromFavorites }) => {
     return (
-        <Card className="h-100">
+        <Card className="movie-card">
             <Card.Img variant="top" src={movie.ImageURL} />
             <Card.Body>
                 <Card.Title>{movie.Title}</Card.Title>
