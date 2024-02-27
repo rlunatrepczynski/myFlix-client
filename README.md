@@ -17,6 +17,7 @@ API the Project Uses:
 https://github.com/rlunatrepczynski/movie-api.git
 
 Link to App:
+https://reneemovieflixapp.netlify.app
 
 Login View:
 Allows users to log in with a username and password
@@ -28,12 +29,20 @@ Main View:
 1. Returns all movies to the user(each movie includes an image, title, and director)
 2. Movie filter for searching of movies by title
 3. User has the ability to select a movie for more details
-4. Allows users to add a movie to their favorite movies list and to remove favorite movies from the user's list
+4. Allows users to add a movie to their favorite movies list
 5. Navigation Bar:
    a. Ability to log out
    b. Ability to select and navigate to Profile View
 
 Single Movie View:
-1. Returns movie data ()
+1. Returns movie data (image, title, description, genre, director, featured)
+2. Back button to return to the Main View
+
+Profile View:
+1. Displays user registration details
+2. Allows users to update their user information(username, email, password, date of birth)
+3. Allows existing users to deregister by using "Delete User" button
+4. Displays favorite movies
+5. Allow users to remove movies from their list of favorites
 
 
